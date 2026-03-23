@@ -7,28 +7,26 @@ int buzzerPin = 13;
 
 void setup() {
   Serial.begin(115200);
-  Serial.println("Sistem Basladi...");
   pinMode(buzzerPin,OUTPUT);
 }
 
 void loop() {
   float distance = sensor.CalDistance();
 
-  if (distance > 0 && distance < 20.0) { // 0'dan büyük ve 20'den küçükse
-    tone(buzzerPin,800); // Daha ince ve uyarıcı bir ses (1kHz)
-    delay(100);            // Kısa bir bip
+  if (distance > 0 && distance < 20.0) { 
+    tone(buzzerPin,800); 
+    delay(100);            
     noTone(buzzerPin);
     
-    // Mesafeye göre bekleme koyarsan (Opsiyonel)
-    // Engel yaklaştıkça bu delay'i küçültebiliriz.
+
     delay(200); 
   } else {
-    noTone(buzzerPin); // 20cm dışındaysa mutlaka sustur
+    noTone(buzzerPin); 
   }
 
-  Serial.print("Mesafe: ");
+  Serial.print("Distance: ");
   Serial.print(distance);
   Serial.println(" cm");
 
-  delay(100); // Genel döngü hızı
+  delay(100); 
 }
